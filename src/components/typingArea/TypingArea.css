@@ -1,0 +1,64 @@
+.typing-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 6rem; */
+    font-size: 1.3rem;
+}
+
+
+
+.Character {
+    white-space: pre;
+}
+  
+.Character-current {
+    animation-name: pulsing;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    animation-direction: alternate;
+}
+
+.Character-incoming {
+    background-color: #6de2ff2d;
+    background-image: linear-gradient(90deg, #000000, #016d88e3);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+}
+
+/* .Character-out {
+    color: silver;
+} */
+
+.Character-out {
+    opacity: .5;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .typing-area {
+        font-size: 1rem;
+        letter-spacing: 0rem;
+        font-stretch: 2rem;
+    }
+}
+
+@keyframes pulsing {
+    from {height: 100%}
+    to {height: 110%}
+}
+
+@keyframes blinking {
+    0% {background-color:rgb(35, 137, 255); }
+    25% {background-color: rgba(127, 80, 255, 0.623); height: 2rem;}
+    50% {background-color: rgba(100, 255, 80, 0.623); }
+    75% {background-color: rgba(255, 214, 80, 1); }
+    100% {background-color: rgba(255, 80, 226, 1); }
+}

@@ -1,0 +1,67 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.background-image {
+    position: absolute;
+    object-fit: cover;
+    height: 150%;
+    width: 100%;
+    z-index: -1;
+}
+
+.title {
+    margin: 2rem;
+}
+
+.nes-button {
+    margin: 2rem;
+}
+
+.text-area-container {
+    height: 8rem;
+    width: 85%;
+    display: flex;
+    direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.reset-text {
+    /* margin: 3rem; */
+}
+
+.time-bar {
+    width: 35rem;
+}
+
+.btn-difficulty-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem;
+}
+
+/* .nes-btn {
+    margin: 1rem;
+} */
+
+.nes-container {
+    background-color: white;
+   
+    padding-top: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .nes-typingarea {
+      width: 50%;
+    }
+}
