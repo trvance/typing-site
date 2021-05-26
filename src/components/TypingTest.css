@@ -1,10 +1,10 @@
 .root {
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    
 }
 
 .background-image {
@@ -17,28 +17,25 @@
 
 .title {
     margin: 2rem;
+    font-size: 3rem;
 }
 
-.nes-button {
-    margin: 2rem;
+.popup-bubble {
+    height: 8rem;
 }
 
-.text-area-container {
+.main-area-container {
     height: 8rem;
     width: 85%;
     display: flex;
     direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
-}
-
-.reset-text {
-    /* margin: 3rem; */
+    margin: 2rem;
 }
 
 .time-bar {
-    width: 35rem;
+    width: 45rem;
 }
 
 .btn-difficulty-row {
@@ -46,17 +43,34 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 1.5rem;
+    margin: 1rem;
 }
 
-/* .nes-btn {
+.button-container {
+    width: 40rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
     margin: 1rem;
-} */
+}
 
 .nes-container {
     background-color: white;
-   
     padding-top: 2rem;
+}
+
+.doubled-layered-button {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-button {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 4.4rem;
 }
 
 @media only screen and (max-width: 768px) {

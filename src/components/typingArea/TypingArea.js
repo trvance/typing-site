@@ -1,20 +1,21 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useKeyPress from '../../hooks/useKeyPress';
 import { commonWords } from '../../listOfWords/lists/commonWords.json';
-import windowDimensions from '../../windowSizeTool/WindowDimensions';
-import { words, randomStringWords } from '../../listOfWords/ListOfWords';
-
+import { lessCommonWords } from '../../listOfWords/lists/lessCommonWords.json';
+import windowDimensions from '../../tools/WindowDimensions';
+import { words, randomStringWords, getNewWords } from '../../listOfWords/ListOfWords';
 import './TypingArea.css';
 import { motion } from "framer-motion";
+import { ACTIONS, GameContext } from '../../context/GameContext';
 
 
 
-const TypingArea = ({startTimer, setKeyCounter}) => {
+const TypingArea = () => {
+    
+    const { state, dispatch } = useContext(GameContext);
+    const [whichWords, setWhichWords] = useState(state.wordList);
+    const [words, setWords] = useState(getNewWords(whichWords));
 
-    const [words, setWords] = useState(randomStringWords);
-    const [numKeys, setNumKeys] = useState(0);
-
-    const [isTimerActivated, setIsTimerActivated] = useState(false);
     const [leftPadding, setLeftPadding] = useState(
         new Array(20).fill(' ').join(''),
     );
@@ -22,19 +23,19 @@ const TypingArea = ({startTimer, setKeyCounter}) => {
     const [currentChar, setCurrentChar] = useState(words.charAt(0));
     const [incomingChars, setIncomingChars] = useState(words.substr(1));
 
-    useKeyPress(key => {
-        if(!isTimerActivated) {
-            startTimer(true);
-        }
-        else {
-            setKeyCounter(numKeys);
-        }
 
+    useKeyPress(key => {
+ 
+        if (!state.isTimerOn) {
+            dispatch({type: ACTIONS.STARTTIMER});
+        }
+        
         let updatedOutgoingChars = outgoingChars;
         let updatedIncomingChars = incomingChars;
-
+        
         if (key === currentChar) {
-            setNumKeys(numKeys + 1);
+
+            dispatch({type: ACTIONS.INCREASEKEYCOUNT});
 
             if (leftPadding.length > 0) {
                 setLeftPadding(leftPadding.substr(1));
@@ -42,16 +43,25 @@ const TypingArea = ({startTimer, setKeyCounter}) => {
 
             updatedOutgoingChars += currentChar;
             setOutgoingChars(updatedOutgoingChars);
-
             setCurrentChar(incomingChars.charAt(0));
-
             updatedIncomingChars = incomingChars.substr(1);
+
             if (updatedIncomingChars.split(' ').length < 10) {
                 updatedIncomingChars += ' ' + randomStringWords();
             }
+
             setIncomingChars(updatedIncomingChars);
         }
+
     });
+
+    useEffect(() => {
+        setWords(getNewWords(state.wordList));
+    }, [state.wordList]);
+
+    useEffect(() => {
+        setWords(randomStringWords);
+    }, [state.isTimerOn])
 
     return (
         <div className="typing-area">
@@ -61,7 +71,7 @@ const TypingArea = ({startTimer, setKeyCounter}) => {
                 </span>
                 <motion.button
                     style={{backgroundColor: 'lightblue', size: '110%', border: 1}}
-                    animate={{scale: 1.1, duration: 1}}
+                    animate={{scale: 1.1, }}
                     transition={{duration: .1}}
                 >
 

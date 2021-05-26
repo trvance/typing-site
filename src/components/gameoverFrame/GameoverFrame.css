@@ -1,0 +1,9 @@
+.root {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.star-container {
+    display: flex;
+    flex-flow: row wrap;
+}
